@@ -23,7 +23,21 @@ class PlaceHolderRepository {
         val albumResponse : Response<Albums?> = api.execute()
         return albumResponse.body()
     }
-}
+
+//    fun createPost(): Post? {
+//        val api: Call<Post?> = placeHolderClient.createPost(
+//            Post(
+//                title = "foo",
+//                body = "bar",
+//                userId = 1
+//            )
+//        )
+//        val postResponse: Response<Post?> = api.execute()
+//        return postResponse.body()
+    }
+
+
+
 
 
 
