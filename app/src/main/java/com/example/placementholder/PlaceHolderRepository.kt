@@ -1,38 +1,31 @@
-package com.example.placementholder
-
-import com.google.gson.GsonBuilder
-import com.google.gson.Strictness
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import com.example.placementholder.Albums
+import com.example.placementholder.Comments
+import com.example.placementholder.Post
+import com.example.placementholder.RetrofitClient.placeHolderClient
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class PlaceHolderRepository {
     fun placeholderNetworkCall(): Post?{
-
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY) // Set the desired log level
-
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(logging) // Add logging as an application interceptor
-            // Add other network interceptors or timeouts here
-            .build()
-        val gson = GsonBuilder()
-            .setStrictness(Strictness.LENIENT)
-            .create()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(okHttpClient)
-            .build()
-        val placeHolderClient = retrofit.create<PlaceHolderApi>()
         val apiCall: Call<Post?> = placeHolderClient.getPlaceHolderPosts()
         val placeHolderPostResponse : Response<Post?> = apiCall.execute()
         return placeHolderPostResponse.body()
     }
+
+    fun getComments(): Comments? {
+        val api: Call<Comments?> = placeHolderClient.getPlaceHolderComments()
+        val commentsResponse : Response<Comments?> = api.execute()
+        return commentsResponse.body()
+    }
+
+    fun getAlbums(): Albums? {
+        val api: Call<Albums?> = placeHolderClient.getPlaceHolderAlbums()
+        val albumResponse : Response<Albums?> = api.execute()
+        return albumResponse.body()
+    }
 }
+
+
+
+
 

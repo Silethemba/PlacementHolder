@@ -1,5 +1,6 @@
 package com.example.placementholder
 
+import PlaceHolderRepository
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +31,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlacementHolderTheme {
+
                 var placeholderPost: Post? by remember {
+                    mutableStateOf(null)
+                }
+                var comments: Comments? by remember {
+                    mutableStateOf(null)
+                }
+                var albums: Albums? by remember {
                     mutableStateOf(null)
                 }
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -55,6 +63,21 @@ class MainActivity : ComponentActivity() {
                         }
                             .let {
                                 Text(placeholderPost?.toString() ?: "No Data",
+                                    fontSize = 25.sp)
+                            }
+
+                        Button(
+                            modifier = Modifier.padding(25.dp),
+                            onClick = {
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    comments = PlaceHolderRepository().getComments()
+                                }
+                            }) {
+                            Text("Fetch Comments",
+                                fontSize = 25.sp)
+                        }
+                            .let {
+                                Text(comments?.toString() ?: "No Data",
                                     fontSize = 25.sp)
                             }
                     }
