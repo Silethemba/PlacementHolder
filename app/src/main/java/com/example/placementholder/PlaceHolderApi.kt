@@ -6,27 +6,23 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface PlaceHolderApi {
     @GET("/posts/5")
     fun getPlaceHolderPosts(): Call<Post?>
 
-    @GET("/comments")
+    @GET("/comments/3")
     fun getPlaceHolderComments(): Call<Comments?>
 
     @GET("/Albums")
     fun getPlaceHolderAlbums(): Call<Albums?>
 
     @POST("/posts")
-    fun postPlaceHolderPosts(): Call<Post?>
-
-    @POST("posts")
-    fun createPost(@Body post: Post): Post
+    fun postPlaceHolderPosts(@Body post: Post): Call<Post?>
 
     @PATCH("posts/{id}")
-    fun patchPost(@Path("id") id: Int, @Body post: Post): Post
+    fun patchPost(@Path("id") id: Int, @Body post: Post): Call<Post?>
 
     @DELETE("posts/{id}")
     fun deletePost(@Path("id") id: Int): Void?

@@ -41,10 +41,12 @@ class MainActivity : ComponentActivity() {
                 var albums: Albums? by remember {
                     mutableStateOf(null)
                 }
+                val post = Post(body ="my body", id = 1,title = "my post", userId = 1)
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
-                        modifier  = Modifier
-                            .padding( top = 100.dp)
+                        modifier = Modifier
+                            .padding(top = 100.dp)
                             .fillMaxSize(),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -54,16 +56,21 @@ class MainActivity : ComponentActivity() {
                         Button(
                             modifier = Modifier.padding(25.dp),
                             onClick = {
-                            lifecycleScope.launch(Dispatchers.IO) {
-                                placeholderPost = PlaceHolderRepository().placeholderNetworkCall()
-                            }
-                        }) {
-                            Text("Fetch Posts",
-                                fontSize = 25.sp)
+                                lifecycleScope.launch(Dispatchers.IO) {
+                                    placeholderPost =
+                                        PlaceHolderRepository().placeholderNetworkCall()
+                                }
+                            }) {
+                            Text(
+                                "Fetch Posts",
+                                fontSize = 25.sp
+                            )
                         }
                             .let {
-                                Text(placeholderPost?.toString() ?: "No Data",
-                                    fontSize = 25.sp)
+                                Text(
+                                    placeholderPost?.toString() ?: "No Data",
+                                    fontSize = 25.sp
+                                )
                             }
 
                         Button(
@@ -71,14 +78,19 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 lifecycleScope.launch(Dispatchers.IO) {
                                     comments = PlaceHolderRepository().getComments()
+                                    PlaceHolderRepository().createPost(post)
                                 }
                             }) {
-                            Text("Fetch Comments",
-                                fontSize = 25.sp)
+                            Text(
+                                "Fetch Comments",
+                                fontSize = 25.sp
+                            )
                         }
                             .let {
-                                Text(comments?.toString() ?: "No Data",
-                                    fontSize = 25.sp)
+                                Text(
+                                    comments?.toString() ?: "No Data",
+                                    fontSize = 25.sp
+                                )
                             }
                     }
                 }
