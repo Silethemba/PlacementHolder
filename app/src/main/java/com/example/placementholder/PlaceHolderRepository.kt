@@ -1,5 +1,5 @@
-import com.example.placementholder.Albums
-import com.example.placementholder.Comments
+import com.example.placementholder.Album
+import com.example.placementholder.Comment
 import com.example.placementholder.Post
 import com.example.placementholder.RetrofitClient.placeHolderClient
 import retrofit2.Call
@@ -12,15 +12,15 @@ class PlaceHolderRepository {
         return placeHolderPostResponse.body()
     }
 
-    fun getComments(): Comments? {
-        val api: Call<Comments?> = placeHolderClient.getPlaceHolderComments()
-        val commentsResponse: Response<Comments?> = api.execute()
+    fun getComments(): Comment? {
+        val api: Call<Comment?> = placeHolderClient.getPlaceHolderComments()
+        val commentsResponse: Response<Comment?> = api.execute()
         return commentsResponse.body()
     }
 
-    fun getAlbums(): Albums? {
-        val api: Call<Albums?> = placeHolderClient.getPlaceHolderAlbums()
-        val albumResponse: Response<Albums?> = api.execute()
+    fun getAlbums(): Album? {
+        val api: Call<Album?> = placeHolderClient.getPlaceHolderAlbums()
+        val albumResponse: Response<Album?> = api.execute()
         return albumResponse.body()
     }
 

@@ -1,6 +1,6 @@
 package com.example.placementholder
 
-data class Comments(
+data class Comment(
     val body: String,
     val email: String,
     val id: Int,

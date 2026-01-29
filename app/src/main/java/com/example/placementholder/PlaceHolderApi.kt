@@ -13,10 +13,10 @@ interface PlaceHolderApi {
     fun getPlaceHolderPosts(): Call<Post?>
 
     @GET("/comments/3")
-    fun getPlaceHolderComments(): Call<Comments?>
+    fun getPlaceHolderComments(): Call<Comment?>
 
     @GET("/Albums")
-    fun getPlaceHolderAlbums(): Call<Albums?>
+    fun getPlaceHolderAlbums(): Call<Album?>
 
     @POST("/posts")
     fun postPlaceHolderPosts(@Body post: Post): Call<Post?>

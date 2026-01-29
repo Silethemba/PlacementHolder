@@ -35,10 +35,10 @@ class MainActivity : ComponentActivity() {
                 var placeholderPost: Post? by remember {
                     mutableStateOf(null)
                 }
-                var comments: Comments? by remember {
+                var comments: Comment? by remember {
                     mutableStateOf(null)
                 }
-                var albums: Albums? by remember {
+                var albums: Album? by remember {
                     mutableStateOf(null)
                 }
                 val post = Post(body ="my body", id = 1,title = "my post", userId = 1)
