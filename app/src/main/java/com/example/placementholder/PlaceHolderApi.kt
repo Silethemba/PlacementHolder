@@ -12,6 +12,9 @@ interface PlaceHolderApi {
     @GET("/posts/5")
     fun getPlaceHolderPosts(): Call<Post?>
 
+    @GET("posts/{id}")
+    fun editPlaceHolderPosts(): Call<Post?>
+
     @GET("/comments/3")
     fun getPlaceHolderComments(): Call<Comment?>
 
@@ -22,10 +25,10 @@ interface PlaceHolderApi {
     fun postPlaceHolderPosts(@Body post: Post): Call<Post?>
 
     @PATCH("posts/{id}")
-    fun patchPost(@Path("id") id: Int, @Body post: Post): Call<Post?>
+    fun patchPlaceHolderPost(@Path("id") id: Int, @Body post: Post): Call<Post?>
 
     @DELETE("posts/{id}")
-    fun deletePost(@Path("id") id: Int): Void?
+    fun deletePlaceHolderPost(@Path("id") id: Int): Call<Post?>
 }
 
 

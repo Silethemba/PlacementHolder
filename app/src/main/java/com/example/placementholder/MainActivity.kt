@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                 var albums: Album? by remember {
                     mutableStateOf(null)
                 }
-                val post = Post(body ="my body", id = 1,title = "my post", userId = 1)
+                val post = Post(body ="my body", id = 5,title = "my post", userId = 1)
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
@@ -58,11 +58,11 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 lifecycleScope.launch(Dispatchers.IO) {
                                     placeholderPost =
-                                        PlaceHolderRepository().placeholderNetworkCall()
+                                        PlaceHolderRepository().getPost()
                                 }
                             }) {
                             Text(
-                                "Fetch Posts",
+                                "Get Posts",
                                 fontSize = 25.sp
                             )
                         }

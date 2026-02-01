@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.Response
 
 class PlaceHolderRepository {
-    fun placeholderNetworkCall(): Post? {
+    fun getPost(): Post? {
         val apiCall: Call<Post?> = placeHolderClient.getPlaceHolderPosts()
         val placeHolderPostResponse: Response<Post?> = apiCall.execute()
         return placeHolderPostResponse.body()
@@ -28,6 +28,17 @@ class PlaceHolderRepository {
         val api: Call<Post?> = placeHolderClient.postPlaceHolderPosts(post)
         val postResponse: Response<Post?> = api.execute()
         return postResponse.body()
+    }
+    fun patchPost(id: Int, post: Post): Post? {
+        val api: Call<Post?> = placeHolderClient.patchPlaceHolderPost(id, post)
+        val patchResponse: Response<Post?> = api.execute()
+        return patchResponse.body()
+    }
+
+    fun deletePost(id: Int): Post? {
+        val api: Call<Post?> = placeHolderClient.deletePlaceHolderPost(id)
+        val patchResponse: Response<Post?> = api.execute()
+        return patchResponse.body()
     }
 }
 
