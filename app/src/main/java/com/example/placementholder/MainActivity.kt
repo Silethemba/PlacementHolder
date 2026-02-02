@@ -24,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.placementholder.ui.theme.PlacementHolderTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.System.console
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlacementHolderTheme {
-
                 var placeholderPost: Post? by remember {
                     mutableStateOf(null)
                 }
@@ -41,7 +41,9 @@ class MainActivity : ComponentActivity() {
                 var albums: Album? by remember {
                     mutableStateOf(null)
                 }
-                val post = Post(body ="my body", id = 5,title = "my post", userId = 1)
+                val post = Post(body = "my body", id = 100, title = "my post", userId = 7)
+                val put = Post(body = "put body test", id = 8, title = "my put post", userId = 7)
+                val patch = Post(body = "patch body", id = 9, title = "my patch post", userId = 7)
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
@@ -50,7 +52,6 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize(),
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.CenterHorizontally
-
                         //modifier = Modifier.padding(innerPadding)
                     ) {
                         Button(
@@ -72,13 +73,15 @@ class MainActivity : ComponentActivity() {
                                     fontSize = 25.sp
                                 )
                             }
-
                         Button(
                             modifier = Modifier.padding(25.dp),
                             onClick = {
                                 lifecycleScope.launch(Dispatchers.IO) {
-                                    comments = PlaceHolderRepository().getComments()
+                                    //comments = PlaceHolderRepository().getComments()
                                     PlaceHolderRepository().createPost(post)
+                                    PlaceHolderRepository().patchPost(2, patch)
+                                    PlaceHolderRepository().putPost(5, put)
+                                    PlaceHolderRepository().deletePost(1)
                                 }
                             }) {
                             Text(

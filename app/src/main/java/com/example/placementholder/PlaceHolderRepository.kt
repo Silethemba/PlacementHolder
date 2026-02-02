@@ -35,6 +35,12 @@ class PlaceHolderRepository {
         return patchResponse.body()
     }
 
+    fun putPost(id: Int, post: Post): Post? {
+        val api: Call<Post?> = placeHolderClient.putPlaceHolderPost(id, post)
+        val patchResponse: Response<Post?> = api.execute()
+        return patchResponse.body()
+    }
+
     fun deletePost(id: Int): Post? {
         val api: Call<Post?> = placeHolderClient.deletePlaceHolderPost(id)
         val patchResponse: Response<Post?> = api.execute()
