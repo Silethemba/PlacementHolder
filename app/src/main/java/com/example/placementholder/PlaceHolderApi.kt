@@ -19,7 +19,7 @@ interface PlaceHolderApi {
     @GET("/comments/3")
     fun getPlaceHolderComments(): Call<Comment?>
 
-    @GET("/Albums")
+    @GET("/albums/5")
     fun getPlaceHolderAlbums(): Call<Album?>
 
     @POST("/posts")
